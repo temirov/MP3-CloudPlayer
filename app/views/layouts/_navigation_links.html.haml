@@ -1,0 +1,23 @@
+- if user_signed_in?
+  %li= link_to 'Edit account', edit_user_registration_path
+  %li= link_to 'Logout', destroy_user_session_path, method: 'delete'
+  - if current_user.try(:admin?)
+    %li= link_to 'Users', users_path
+- else
+  %li= link_to 'Login', new_user_session_path
+  %li= link_to 'Sign up', new_user_registration_path
+
+/ .btn-group
+/   <button type="button" class="btn btn-danger">Action</button>
+/   <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+/     <span class="caret"></span>
+/     <span class="sr-only">Toggle Dropdown</span>
+/   </button>
+/   <ul class="dropdown-menu" role="menu">
+/     <li><a href="#">Action</a></li>
+/     <li><a href="#">Another action</a></li>
+/     <li><a href="#">Something else here</a></li>
+/     <li class="divider"></li>
+/     <li><a href="#">Separated link</a></li>
+/   </ul>
+/ </div>
