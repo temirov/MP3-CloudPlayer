@@ -15,6 +15,7 @@ gem 'sendgrid'
 gem 'thin'
 gem 'omniauth-facebook'
 gem "mongoid-paperclip", require: "mongoid_paperclip"
+gem 'aws-sdk'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', platforms: [:mri_19, :mri_20, :mri_21, :rbx]
@@ -28,6 +29,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'pry-rails'
   gem 'pry-rescue'
+  gem 'pry-debugger'
   gem 'rspec-rails'
 end
 group :test do
