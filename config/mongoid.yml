@@ -67,3 +67,36 @@ test:
         # low amounts for fast failures.
         max_retries: 1
         retry_interval: 0
+
+<% if ENV['MONGOHQ_URL'] %>
+
+production:
+  sessions:
+    default:
+      uri: <%= ENV['MONGOHQ_URL'] %>
+      options:
+
+staging:
+  sessions:
+    default:
+      uri: <%= ENV['MONGOHQ_URL'] %>
+      options:
+
+<% else %>
+
+staging:
+  sessions:
+    default:
+      database: a3_upload_staging
+      hosts:
+        - localhost:27017
+      options:
+
+production:
+  sessions:
+    default:
+      database: a3_upload_production
+      hosts:
+        - localhost:27017
+      options:
+<% end %>
