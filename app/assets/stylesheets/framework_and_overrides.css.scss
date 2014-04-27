@@ -85,3 +85,6 @@ section {
   @extend .btn-primary;
   @extend .btn-xs;
 }
+.mp3-player, .mp3-upload {
+  @include make-xs-column(3);
+}

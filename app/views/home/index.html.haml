@@ -1,1 +1,12 @@
-%h3 Home
+%h3=t('.title')
+
+-if user_signed_in?
+  
+  = render @mp3_files
+
+  .row
+    .mp3-upload
+      = form_for @mp3 do |f|
+        = f.label :mp3
+        = f.file_field :mp3
+        = f.submit 'Upload'

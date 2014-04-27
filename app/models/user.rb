@@ -3,6 +3,8 @@ class User
   include Mongoid::Timestamps
   include Mongoid::Paperclip
 
+  has_many :mp3_uploads
+
   has_mongoid_attached_file :avatar
 
   # Include default devise modules. Others available are:
@@ -28,6 +30,8 @@ class User
   field :last_sign_in_at,    type: Time
   field :current_sign_in_ip, type: String
   field :last_sign_in_ip,    type: String
+
+  field :admin, type: Boolean, default: false
 
   field :provider
   field :uid
