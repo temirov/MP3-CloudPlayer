@@ -23,3 +23,5 @@ en:
   home:
     index:
       title: MP3 CloudPlayer
+      not_logged_in: "Please, log in to see you library"
+      submit_caption: Upload
