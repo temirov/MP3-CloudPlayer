@@ -5,7 +5,7 @@ development:
     default:
       # Defines the name of the default database that Mongoid can connect to.
       # (required).
-      database: a3_upload_development
+      database: mp3_cloud_player_development
       # Provides the hosts the default session can connect to. Must be an array
       # of host:port pairs. (required)
       hosts:
@@ -58,7 +58,7 @@ development:
 test:
   sessions:
     default:
-      database: a3_upload_test
+      database: mp3_cloud_player_test
       hosts:
         - localhost:27017
       options:
@@ -87,7 +87,7 @@ staging:
 staging:
   sessions:
     default:
-      database: a3_upload_staging
+      database: mp3_cloud_player_staging
       hosts:
         - localhost:27017
       options:
@@ -95,7 +95,7 @@ staging:
 production:
   sessions:
     default:
-      database: a3_upload_production
+      database: mp3_cloud_player_production
       hosts:
         - localhost:27017
       options:
