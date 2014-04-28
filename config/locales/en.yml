@@ -25,3 +25,7 @@ en:
       title: MP3 CloudPlayer
       not_logged_in: "Please, log in to see you library"
       submit_caption: Upload
+  mp3_uploads:
+    mp3_upload: 
+      delete_confirmation: "The file %{file_name} will be deleted from your library. Continue?"
+      browser_no_support: Your browser does not support the audio element.
