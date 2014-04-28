@@ -7,7 +7,7 @@ class Mp3Upload
   has_mongoid_attached_file :mp3,
     path: ":attachment/:id",
     storage: :s3,
-    s3_credentials: File.join(Rails.root, 'config', 'amazon.yml')
+    s3_credentials: Rails.application.secrets.s3
 
   validates_attachment_content_type :mp3, content_type: ["audio/mpeg"]
 end
