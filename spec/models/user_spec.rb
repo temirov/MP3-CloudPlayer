@@ -1,58 +1,51 @@
 require 'spec_helper'
+require 'faker'
 
 describe User do
-
-  before(:each) do
-    @attr = {
-      :name => "Example User",
-      :email => "user@example.com",
-      :password => "changeme",
-      :password_confirmation => "changeme"
-    }
+  it "has a valid factory" do
+    create(:user).should be_valid
   end
 
-  it "should create a new instance given a valid attribute" do
-    User.create!(@attr)
-  end
+  context "email validations" do
+    it "should require an email address" do
+      user = build(:user, email: "")
+      user.should_not be_valid
+    end
 
-  it "should require an email address" do
-    no_email_user = User.new(@attr.merge(:email => ""))
-    no_email_user.should_not be_valid
-  end
+    it "should accept valid email addresses" do
+      addresses = %w[user@foo.com THE_USER@foo.bar.org first.last@foo.jp]
+      addresses.each do |address|
+        user = build(:user, email: address)
+        user.should be_valid
+      end
+    end
 
-  it "should accept valid email addresses" do
-    addresses = %w[user@foo.com THE_USER@foo.bar.org first.last@foo.jp]
-    addresses.each do |address|
-      valid_email_user = User.new(@attr.merge(:email => address))
-      valid_email_user.should be_valid
+    it "should reject invalid email addresses" do
+      addresses = %w[user@foo,com user_at_foo.org example.user@foo.]
+      addresses.each do |address|
+        user = build(:user, email: address)
+        user.should_not be_valid
+      end
+    end
+
+    it "should reject duplicate email addresses" do
+      address = Faker::Internet.email
+      create(:user, email: address)
+      user = build(:user, email: address)
+      user.should_not be_valid
+    end
+
+    it "should reject email addresses identical up to case" do
+      address = Faker::Internet.email
+      create(:user, email: address.upcase)
+      user = build(:user, email: address)
+      user.should_not be_valid
     end
   end
 
-  it "should reject invalid email addresses" do
-    addresses = %w[user@foo,com user_at_foo.org example.user@foo.]
-    addresses.each do |address|
-      invalid_email_user = User.new(@attr.merge(:email => address))
-      invalid_email_user.should_not be_valid
-    end
-  end
-
-  it "should reject duplicate email addresses" do
-    User.create!(@attr)
-    user_with_duplicate_email = User.new(@attr)
-    user_with_duplicate_email.should_not be_valid
-  end
-
-  it "should reject email addresses identical up to case" do
-    upcased_email = @attr[:email].upcase
-    User.create!(@attr.merge(:email => upcased_email))
-    user_with_duplicate_email = User.new(@attr)
-    user_with_duplicate_email.should_not be_valid
-  end
-
-  describe "passwords" do
-
+  context "password" do
     before(:each) do
-      @user = User.new(@attr)
+      @user = build(:user)
     end
 
     it "should have a password attribute" do
@@ -64,30 +57,25 @@ describe User do
     end
   end
 
-  describe "password validations" do
-
+  context "password validations" do
     it "should require a password" do
-      User.new(@attr.merge(:password => "", :password_confirmation => "")).
-        should_not be_valid
+      build(:user, password: "", password_confirmation: "").should_not be_valid
     end
 
     it "should require a matching password confirmation" do
-      User.new(@attr.merge(:password_confirmation => "invalid")).
-        should_not be_valid
+      build(:user, password_confirmation: "invalid").should_not be_valid
     end
 
     it "should reject short passwords" do
-      short = "a" * 5
-      hash = @attr.merge(:password => short, :password_confirmation => short)
-      User.new(hash).should_not be_valid
+      # short = Faker::Internet.password(5)
+      short = "short"
+      build(:user, password: short, password_confirmation: short).should_not be_valid
     end
-
   end
 
-  describe "password encryption" do
-
+  context "password encryption" do
     before(:each) do
-      @user = User.create!(@attr)
+      @user = create(:user)
     end
 
     it "should have an encrypted password attribute" do
@@ -97,7 +85,35 @@ describe User do
     it "should set the encrypted password attribute" do
       @user.encrypted_password.should_not be_blank
     end
-
   end
 
+  context "#admin" do
+    it 'builds non-admin user by default' do 
+      create(:user).should have_field(:admin).of_type(Mongoid::Boolean).with_default_value_of(false) 
+    end
+  end
+
+  context '.admins' do
+    it 'returns admin users' do
+      first_user = create(:admin)
+      second_user = create(:admin)
+      third_user = create(:user)
+
+      result = User.admins
+
+      expect(result).to eq [first_user, second_user]
+    end
+  end
+  
+  context '.non_admins' do
+    it 'returns non admin users' do
+      first_user = create(:user)
+      second_user = create(:user)
+      third_user = create(:admin)
+
+      result = User.non_admins
+
+      expect(result).to eq [first_user, second_user]
+    end
+  end
 end

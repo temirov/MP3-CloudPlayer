@@ -38,6 +38,12 @@ class User
   field :name
   field :image
 
+  scope :admins, -> { where(admin: true) }
+  scope :non_admins, -> { where(admin: false) }
+
+  index name: 1
+  index email: 1
+
   ## Confirmable
   # field :confirmation_token,   type: String
   # field :confirmed_at,         type: Time
@@ -63,9 +69,8 @@ class User
       user.uid = auth.uid
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
-      user.name = auth.info.name   # assuming the user model has a name
-      user.image = auth.info.image # assuming the user model has an image
-      # user.avatar = auth.info.image # assuming the user model has an image
+      user.name = auth.info.name 
+      user.image = auth.info.image 
     end
   end
 end
