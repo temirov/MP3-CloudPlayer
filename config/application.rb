@@ -11,7 +11,7 @@ require "sprockets/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env)
 
-module A3Upload
+module Mp3CloudPlayer
   class Application < Rails::Application
 
     # don't generate RSpec tests for views and helpers

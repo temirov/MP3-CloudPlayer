@@ -16,6 +16,7 @@ gem 'thin'
 gem 'omniauth-facebook'
 gem "mongoid-paperclip", require: "mongoid_paperclip"
 gem 'aws-sdk'
+gem 'rename'
 group :production do
   gem 'rails_12factor' 
 end

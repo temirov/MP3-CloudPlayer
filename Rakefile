@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-A3Upload::Application.load_tasks
+Mp3CloudPlayer::Application.load_tasks

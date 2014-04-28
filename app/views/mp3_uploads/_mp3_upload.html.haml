@@ -1,6 +1,6 @@
 .mp3-player
   = link_to mp3_upload.mp3_file_name, mp3_upload.mp3.url
-  = link_to "x", mp3_upload_path(mp3_upload), method: :delete
+  = link_to "x", mp3_upload_path(mp3_upload), method: :delete, data:{confirm: "The file #{mp3_upload.mp3_file_name} will be deleted from your library. Continue?"}
   %audio{controls: 'controls'}
     %source{src: "#{mp3_upload.mp3.url}", type:"audio/mpeg"}
     Your browser does not support the audio element.
