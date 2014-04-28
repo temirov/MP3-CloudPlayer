@@ -1,22 +1,20 @@
 class Mp3UploadsController < ApplicationController
-  before_action ->(mp3_upload_id = params[:id]) { find_mp3_upload mp3_upload_id }, only: :destroy
+  before_action ->(listener = self) { set_mp3_handler listener }, only: %w|create destroy|
 
   def create
-    @mp3 = current_user.mp3_uploads.build mp3_upload_params
-
-    if @mp3.save
-      redirect_to root_path, notice: "The file #{@mp3.mp3_file_name} has been uploaded to your CloudStorage"
-    else
-      redirect_to root_path, alert: "The file couldn't have been uploaded"
-    end
+    @mp3_handler.upload mp3_upload_params, current_user
   end
 
   def destroy
-    if @mp3_upload.delete
-      redirect_to root_path, notice: "The file #{@mp3_upload.mp3_file_name} has been successfully deleted"
-    else
-      redirect_to root_path, alert: "There was an error deleting file #{@mp3_upload.mp3_file_name}. Please, try again later"
-    end
+    @mp3_handler.delete params[:id]
+  end
+
+  def operation_succeeded_with message
+    redirect_to root_path, notice: message
+  end
+
+  def operation_failed_with message
+    redirect_to root_path, alert: message
   end
 
   private
