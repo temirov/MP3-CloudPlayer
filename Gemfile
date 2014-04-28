@@ -16,7 +16,7 @@ gem 'thin'
 gem 'omniauth-facebook'
 gem "mongoid-paperclip", require: "mongoid_paperclip"
 gem 'aws-sdk'
-gem 'rename'
+gem 'flat-ui-sass', github: 'wingrunr21/flat-ui-sass'
 group :production do
   gem 'rails_12factor' 
 end
