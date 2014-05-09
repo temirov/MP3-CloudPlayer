@@ -1,73 +1,12 @@
-A3 Upload
+MP3 Cloud Player
 =========
 
-This application was generated with the [rails_apps_composer](https://github.com/RailsApps/rails_apps_composer) gem
-provided by the [RailsApps Project](http://railsapps.github.io/).
+This application demonstrates Hexagonal Rails approach. You can take a look at Matt Wynne's presentation of [Hexagonal Rails](https://www.youtube.com/watch?v=CGN4RFkhH2M).
 
-Diagnostics
+Synopsis
 -----------
 
-This application was built with recipes that are known to work together.
-
-This application was built with preferences that are NOT known to work
-together.
-
-If the application doesn’t work as expected, please [report an issue](https://github.com/RailsApps/rails_apps_composer/issues)
-and include these diagnostics:
-
-We’d also like to know if you’ve found combinations of recipes or
-preferences that do work together.
-
-Recipes:
-
-* apps4
-* controllers
-* core
-* deployment
-* email
-* extras
-* frontend
-* gems
-* git
-* init
-* models
-* prelaunch
-* railsapps
-* readme
-* routes
-* saas
-* setup
-* testing
-* tests4
-* views
-
-Preferences:
-
-* git: true
-* apps4: none
-* dev_webserver: thin
-* prod_webserver: thin
-* database: mongodb
-* orm: mongoid
-* templates: haml
-* unit_test: rspec
-* integration: rspec-capybara
-* continuous_testing: none
-* fixtures: factory_girl
-* frontend: bootstrap3
-* email: sendgrid
-* authentication: devise
-* devise_modules: default
-* authorization: none
-* form_builder: none
-* starter_app: users_app
-* rvmrc: false
-* quiet_assets: true
-* local_env_file: foreman
-* better_errors: true
-* pry: true
-* ban_spiders: true
-* github: true
+The idea is to consolidate all domain logic in seperate classes, independently from Models or Controllers.
 
 Ruby on Rails
 -------------
@@ -90,36 +29,12 @@ Development
 -   Template Engine: Haml
 -   Testing Framework: RSpec and Factory Girl
 -   Front-end Framework: Bootstrap 3.0 (Sass)
--   Form Builder: None
 -   Authentication: Devise
--   Authorization: None
--   Admin: None
-
-Email
------
-
-The application is configured to send email using a SendGrid account.
-
-Email delivery is disabled in development.
 
 Getting Started
 ---------------
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-
-Documentation and Support
--------------------------
-
-This is the only documentation.
-
-#### Issues
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-
-Similar Projects
-----------------
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+Please, go to [MP3 Cloud Player](http://mp3-cloud-player.herokuapp.com) to see a working example.
 
 Contributing
 ------------
@@ -135,12 +50,7 @@ If you add functionality to this application, create an alternative
 implementation, or build an application that is similar, please contact
 me and I’ll add a note to the README so that others can find your work.
 
-Credits
--------
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-
 License
 -------
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+Not sure, MIT, I guess
